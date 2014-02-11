@@ -65,7 +65,7 @@ public class HomeController {
 		}
 		else if(loginFaculty != null){			
 			logger.info("I'm a faculty!");
-			return "redirect:/";
+			return "redirect:/faculty";
 		}
 		else if(loginStudent != null){			
 			logger.info("I'm a student!");
