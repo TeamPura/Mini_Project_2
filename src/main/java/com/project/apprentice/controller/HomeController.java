@@ -58,19 +58,16 @@ public class HomeController {
 		loginFaculty = loginUserService.LoginFaculty(facultyId, facultyPassword);
 		loginStudent = loginUserService.LoginStudent(studentId, studentPassword);
 				
-		if(loginAdmin != null ){
-			
+		if(loginAdmin != null ){			
 			logger.info("I'm an admin!");
 			return "redirect:/";
 			
 		}
-		else if(loginFaculty != null){
-			
+		else if(loginFaculty != null){			
 			logger.info("I'm a faculty!");
 			return "redirect:/";
 		}
-		else if(loginStudent != null){
-			
+		else if(loginStudent != null){			
 			logger.info("I'm a student!");
 			return "student/dashboard";
 		}
