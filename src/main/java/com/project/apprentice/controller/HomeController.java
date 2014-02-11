@@ -69,7 +69,7 @@ public class HomeController {
 		}
 		else if(loginStudent != null){			
 			logger.info("I'm a student!");
-			return "student/dashboard";
+			return "redirect:/studentDashboard";
 		}
 		else{
 			logger.info("Not a registered user!");
