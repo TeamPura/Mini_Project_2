@@ -24,6 +24,7 @@ import com.project.apprentice.service.LoginUserService;
 @Controller
 public class HomeController {
 	
+	//hello
 	@Resource
 	private LoginUserService loginUserService;
 	
