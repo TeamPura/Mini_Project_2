@@ -33,6 +33,8 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
+	public Faculty faculty;
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -59,16 +61,13 @@ public class HomeController {
 		loginStudent = loginUserService.LoginStudent(studentId, studentPassword);
 				
 		if(loginAdmin != null ){			
-			logger.info("I'm an admin!");
 			return "redirect:/";
-			
 		}
-		else if(loginFaculty != null){			
-			logger.info("I'm a faculty!");
+		else if(loginFaculty != null){
+			faculty = loginFaculty;
 			return "redirect:/faculty";
 		}
 		else if(loginStudent != null){			
-			logger.info("I'm a student!");
 			return "redirect:/studentDashboard";
 		}
 		else{

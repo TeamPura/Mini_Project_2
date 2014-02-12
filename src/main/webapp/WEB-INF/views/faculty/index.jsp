@@ -24,6 +24,19 @@
 </head><!--/head-->
 
 <body data-spy="scroll" data-target="#navbar" data-offset="0">
+
+<!--  
+<script>
+  $(function() {
+    $( "#datepicker" ).datepicker();
+  });
+  </script>
+
+-->
+
+
+
+
     <header id="header" role="banner">
         <div class="container">
             <div id="navbar" class="navbar navbar-default">
@@ -78,48 +91,43 @@
             <div class="box first">
              <br><br><br><br><br>
                 <div class="row">
-                    <div class="col-md-4 col-sm-6">
-                        <div class="center">
-                            <i class="icon-apple icon-md icon-color1"></i>
-                            <h4>iOS development</h4>
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae.</p>
-                        </div>
-                    </div><!--/.col-md-4-->
-                    <div class="col-md-4 col-sm-6">
-                        <div class="center">
-                            <i class="icon-android icon-md icon-color2"></i>
-                            <h4>Android development</h4>
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae.</p>
-                        </div>
-                    </div><!--/.col-md-4-->
-                    <div class="col-md-4 col-sm-6">
-                        <div class="center">
-                            <i class="icon-windows icon-md icon-color3"></i>
-                            <h4>Windows Phone development</h4>
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae.</p>
-                        </div>
-                    </div><!--/.col-md-4-->
-                    <div class="col-md-4 col-sm-6">
-                        <div class="center">
-                            <i class="icon-html5 icon-md icon-color4"></i>
-                            <h4>Ruby on Rails development</h4>
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae.</p>
-                        </div>
-                    </div><!--/.col-md-4-->
-                    <div class="col-md-4 col-sm-6">
-                        <div class="center">
-                            <i class="icon-css3 icon-md icon-color5"></i>
-                            <h4>Javascript development</h4>
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae.</p>
-                        </div>
-                    </div><!--/.col-md-4-->
-                    <div class="col-md-4 col-sm-6">
-                        <div class="center">
-                            <i class="icon-thumbs-up icon-md icon-color6"></i>
-                            <h4>Responsive web design</h4>
-                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae.</p>
-                        </div>
-                    </div><!--/.col-md-4-->
+                    
+                    
+                  	<table class = "CSSTableGenerator" align = "center"> 
+                   
+                  	 	<tr>	
+                   				<td>Class ID</td> 
+								<td>Enrollment Due Date</td> 
+                                <td>Max</td> 
+                                <td>Min</td> 
+                                <td>Start Date</td> 
+                                <td>Status</td> 
+                                <td>Day</td>
+                                <td>Room</td>  
+                                <td>Start</td>
+                                <td>End</td>  
+                   		</tr>
+                   
+					<c:forEach var="listValue" items="${classList}">
+
+                        <tr>
+                        		<td>${listValue.subject.subjName}</td> 
+								<td>${listValue.dueEnrollmentDate}</td> 
+                                <td> ${listValue.maxStudents}</td> 
+                                <td> ${listValue.minStudents}</td> 
+                                <td> ${listValue.startClassDate}</td> 
+                                <td> ${listValue.status}</td> 
+                                <td> ${listValue.day.dayName}</td>
+                                <td> ${listValue.room.roomName}</td>  
+                                <td> ${listValue.schedule.scheduleStartTime}</td> 
+                                <td> ${listValue.schedule.scheduleEndTime}</td> 
+                        </tr>
+
+           			 </c:forEach>
+                    
+                    </table>
+                                        
+                    
                 </div><!--/.row-->
             </div><!--/.box-->
         </div><!--/.container-->
@@ -130,105 +138,108 @@
             <div class="box">
             <br>
                 <div class="center gap">
-                    <h2>Portfolio</h2>
-                    <p class="lead">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac<br>turpis egestas. Vestibulum tortor quam, feugiat vitae.</p>
-                </div><!--/.center-->
-                <ul class="portfolio-filter">
-                    <li><a class="btn btn-primary active" href="#" data-filter="*">All</a></li>
-                    <li><a class="btn btn-primary" href="#" data-filter=".bootstrap">Bootstrap</a></li>
-                    <li><a class="btn btn-primary" href="#" data-filter=".html">HTML</a></li>
-                    <li><a class="btn btn-primary" href="#" data-filter=".wordpress">Wordpress</a></li>
-                </ul><!--/#portfolio-filter-->
-                <ul class="portfolio-items col-4">
-                    <li class="portfolio-item apps">
-                        <div class="item-inner">
-                            <div class="portfolio-image">
-                                <img src="images/portfolio/thumb/item1.jpg" alt="">
-                                <div class="overlay">
-                                    <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item1.jpg"><i class="icon-eye-open"></i></a>             
-                                </div>
-                            </div>
-                            <h5>Lorem ipsum dolor sit amet</h5>
-                        </div>
-                    </li><!--/.portfolio-item-->
-                    <li class="portfolio-item joomla bootstrap">
-                        <div class="item-inner">
-                            <div class="portfolio-image">
-                                <img src="images/portfolio/thumb/item2.jpg" alt="">
-                                <div class="overlay">
-                                    <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item2.jpg"><i class="icon-eye-open"></i></a>  
-                                </div>
-                            </div> 
-                            <h5>Lorem ipsum dolor sit amet</h5>         
-                        </div>
-                    </li><!--/.portfolio-item-->
-                    <li class="portfolio-item bootstrap wordpress">
-                        <div class="item-inner">
-                            <div class="portfolio-image">
-                                <img src="images/portfolio/thumb/item3.jpg" alt="">
-                                <div class="overlay">
-                                    <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item3.jpg"><i class="icon-eye-open"></i></a>        
-                                </div> 
-                            </div>
-                            <h5>Lorem ipsum dolor sit amet</h5>          
-                        </div>           
-                    </li><!--/.portfolio-item-->
-                    <li class="portfolio-item joomla wordpress apps">
-                        <div class="item-inner">
-                            <div class="portfolio-image">
-                                <img src="images/portfolio/thumb/item4.jpg" alt="">
-                                <div class="overlay">
-                                    <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item4.jpg"><i class="icon-eye-open"></i></a>          
-                                </div>   
-                            </div>
-                            <h5>Lorem ipsum dolor sit amet</h5>        
-                        </div>           
-                    </li><!--/.portfolio-item-->
-                    <li class="portfolio-item joomla html">
-                        <div class="item-inner">
-                            <div class="portfolio-image">
-                                <img src="images/portfolio/thumb/item5.jpg" alt="">
-                                <div class="overlay">
-                                    <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item5.jpg"><i class="icon-eye-open"></i></a>          
-                                </div>  
-                            </div>
-                            <h5>Lorem ipsum dolor sit amet</h5>  
-                        </div>       
-                    </li><!--/.portfolio-item-->
-                    <li class="portfolio-item wordpress html">
-                        <div class="item-inner">
-                            <div class="portfolio-image">
-                                <img src="images/portfolio/thumb/item6.jpg" alt="">
-                                <div class="overlay">
-                                    <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item6.jpg"><i class="icon-eye-open"></i></a>           
-                                </div>  
-                            </div>
-                            <h5>Lorem ipsum dolor sit amet</h5>         
-                        </div>           
-                    </li><!--/.portfolio-item-->
-                    <li class="portfolio-item joomla html">
-                        <div class="item-inner">
-                            <div class="portfolio-image">
-                                <img src="images/portfolio/thumb/item5.jpg" alt="">
-                                <div class="overlay">
-                                    <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item5.jpg"><i class="icon-eye-open"></i></a>          
-                                </div>  
-                            </div>
-                            <h5>Lorem ipsum dolor sit amet</h5>  
-                        </div>       
-                    </li><!--/.portfolio-item-->
-                    <li class="portfolio-item wordpress html">
-                        <div class="item-inner">
-                            <div class="portfolio-image">
-                                <img src="images/portfolio/thumb/item6.jpg" alt="">
-                                <div class="overlay">
-                                    <a class="preview btn btn-danger" title="Lorem ipsum dolor sit amet" href="images/portfolio/full/item6.jpg"><i class="icon-eye-open"></i></a>           
-                                </div>   
-                            </div>
-                            <h5>Lorem ipsum dolor sit amet</h5>        
-                        </div>         
-                    </li><!--/.portfolio-item-->
-                </ul>   
+                    <h2>Add Class</h2>
+                    </div><!--/.center-->
+                
+                
+                
+                <form class="form-horizontal">
+<fieldset>
+
+<!-- Form Name -->
+<legend>Add Class</legend>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="Startdate">Start Date:</label>
+  <div class="controls">
+    <input id="datepicker" name="Startdate" placeholder="dd-mm-yyyy" class="input-small" required type="text">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="minstud">Minimum Students:</label>
+  <div class="controls">
+    <input id="minstud" name="minstud" placeholder="" class="input-mini" required type="text">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">Maximun Students:</label>
+  <div class="controls">
+    <input id="textinput" name="textinput" placeholder="" class="input-mini" type="text">
+    
+  </div>
+</div>
+
+<!-- Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">Due Date</label>
+  <div class="controls">
+    <input id="datepicker" name="textinput" placeholder="dd-mm-yyyy hh:mm" class="input-medium" required type="text">
+    
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="control-group">
+  <label class="control-label" for="selectbasic">Days</label>
+  <div class="controls">
+    <select id="selectbasic" name="selectbasic" class="input-medium">
+   		<c:forEach var="listValue" items="${dayList}">
+                   <option>${listValue.dayName}</option>
+	   	</c:forEach>
+ </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="control-group">
+  <label class="control-label" for="asd">Start Time</label>
+  <div class="controls">
+    <select id="startTime" name="startTime" class="input-medium">
+      	<c:forEach var="listValue" items="${scheduleList}">
+                   <option>${listValue.scheduleStartTime}</option>
+	   	</c:forEach>
+    </select>
+  </div>
+</div>
+
+<!-- Select Basic -->
+<div class="control-group">
+  <label class="control-label" for="asd">End Time</label>
+  <div class="controls">
+    <select id="endTime" name="endTime" class="input-medium">
+      	<c:forEach var="listValue" items="${scheduleList}">
+                   <option>${listValue.scheduleEndTime}</option>
+	   	</c:forEach>
+    </select>
+  </div>
+</div>
+
+<!-- Button (Double) -->
+<div class="control-group">
+  <label class="control-label" for="button1id"></label>
+  <div class="controls">
+    <button id="button1id" name="button1id" class="btn btn-success">Submit</button>
+    <button id="button2id" name="button2id" class="btn btn-danger">Cancel</button>
+  </div>
+</div>
+
+</fieldset>
+</form>
+                
+                
+                
+                
+                
+                
+                
+                
             </div><!--/.box-->
         </div><!--/.container-->
     </section><!--/#portfolio-->
@@ -238,7 +249,7 @@
         	<div class="box">
         	<br>
                 <div class="center">
-                    <h2>See our Pricings</h2>
+                    <h2>Edit Class</h2>
                     <p class="lead">Pellentesque habitant morbi tristique senectus et netus et <br>malesuada fames ac turpis egestas.</p>
                 </div><!--/.center-->   
                 <div class="big-gap"></div>
@@ -288,7 +299,7 @@
         <div class="container">
             <div class="box">
                 <div class="center">
-                    <h2>Meet the Team</h2>
+                    <h2>Faculty Profile</h2>
                     <p class="lead">Pellentesque habitant morbi tristique senectus et netus et<br>malesuada fames ac turpis egestas.</p>
                 </div>
                 <div class="gap"></div>
@@ -370,5 +381,11 @@
     <script src="resources/faculty/js/jquery.isotope.min.js"></script>
     <script src="resources/faculty/js/jquery.prettyPhoto.js"></script>
     <script src="resources/faculty/js/main.js"></script>
+    
+  <!--   
+    <link href="resources/faculty/css/" rel="stylesheet">
+    <script src="resources/faculty/js/"></script>
+    <script src="resources/faculty/js/"></script> --> 
+    
 </body>
 </html>

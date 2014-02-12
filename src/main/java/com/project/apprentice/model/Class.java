@@ -18,8 +18,6 @@ public class Class implements Serializable {
 	@Column(name="class_id")
 	private int classId;
 
-	private String days;
-
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="due_enrollment_date")
 	private Date dueEnrollmentDate;
@@ -83,14 +81,6 @@ public class Class implements Serializable {
 
 	public void setClassId(int classId) {
 		this.classId = classId;
-	}
-
-	public String getDays() {
-		return this.days;
-	}
-
-	public void setDays(String days) {
-		this.days = days;
 	}
 
 	public Date getDueEnrollmentDate() {

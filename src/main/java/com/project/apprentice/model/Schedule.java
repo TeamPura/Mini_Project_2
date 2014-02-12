@@ -20,9 +20,6 @@ public class Schedule implements Serializable {
 	@Column(name="schedule_end_time")
 	private String scheduleEndTime;
 
-	@Column(name="schedule_name")
-	private String scheduleName;
-
 	@Column(name="schedule_start_time")
 	private String scheduleStartTime;
 
@@ -47,14 +44,6 @@ public class Schedule implements Serializable {
 
 	public void setScheduleEndTime(String scheduleEndTime) {
 		this.scheduleEndTime = scheduleEndTime;
-	}
-
-	public String getScheduleName() {
-		return this.scheduleName;
-	}
-
-	public void setScheduleName(String scheduleName) {
-		this.scheduleName = scheduleName;
 	}
 
 	public String getScheduleStartTime() {
