@@ -7,9 +7,11 @@ import com.project.apprentice.model.Class;
 import com.project.apprentice.model.Day;
 import com.project.apprentice.model.Faculty;
 import com.project.apprentice.model.Schedule;
+import com.project.apprentice.model.SchoolYear;
 import com.project.apprentice.repos.ClassRepository;
 import com.project.apprentice.repos.DayRepository;
 import com.project.apprentice.repos.ScheduleRepository;
+import com.project.apprentice.repos.SchoolYearRepository;
 
 
 @Service
@@ -24,6 +26,8 @@ public class FacultyImplementation implements FacultyService {
 	@Resource
 	private ScheduleRepository scheduleRepository;
 	
+	@Resource
+	private SchoolYearRepository schoolYearRepository;
 		
 	public List<Class> viewAll(Faculty faculty){
 		
@@ -45,6 +49,14 @@ public class FacultyImplementation implements FacultyService {
 		List<Schedule> allSchedule =  scheduleRepository.findAll();
 		
 		return (allSchedule);
+		
+	}
+	
+	public List<SchoolYear> getSchoolYear(){
+		
+		List<SchoolYear> allSchoolYear =  schoolYearRepository.findAll();
+		
+		return (allSchoolYear);
 		
 	}
 }

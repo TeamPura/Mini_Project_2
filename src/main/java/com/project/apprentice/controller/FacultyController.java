@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import com.project.apprentice.model.Class;
 import com.project.apprentice.model.Schedule;
+import com.project.apprentice.model.SchoolYear;
 import com.project.apprentice.service.FacultyService;
 import com.project.apprentice.model.Day;
 
@@ -48,12 +49,15 @@ public class FacultyController {
 		
 		List<Day> dayList = facultyService.getDay();
 		List<Schedule> scheduleList = facultyService.getSchedule();
+		List<SchoolYear> schoolYearList = facultyService.getSchoolYear();
 		
 		List<Class> classList = facultyService.viewAll(homeController.faculty);
 		
 		logger.info("Class: " + classList);
 		
+		model.addAttribute("faculty",homeController.faculty);
 		model.addAttribute("classList", classList);
+		model.addAttribute("schoolYearList", schoolYearList);
 		model.addAttribute("dayList",dayList);
 		model.addAttribute("scheduleList",scheduleList);
 		

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8">  
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -12,6 +12,25 @@
     <link href="resources/faculty/css/font-awesome.min.css" rel="stylesheet">
     <link href="resources/faculty/css/prettyPhoto.css" rel="stylesheet">
     <link href="resources/faculty/css/main.css" rel="stylesheet">
+        
+    <script src="resources/faculty/js/jquery.js"></script>
+    <script src="resources/faculty/js/bootstrap.min.js"></script>
+    <script src="resources/faculty/js/jquery.isotope.min.js"></script>
+    <script src="resources/faculty/js/jquery.prettyPhoto.js"></script>
+    <script src="resources/faculty/js/main.js"></script>    
+  
+    <link href="resources/faculty/css/jquery-ui-1.10.4.custom.css" rel="stylesheet">
+    <script src="resources/faculty/js/jquery-1.10.2.js"></script>
+    <script src="resources/faculty/js/jquery-ui-1.10.4.custom.js"></script> 
+    
+    <script>
+    $(function() {
+	    $( "#datepicker" ).datepicker();
+	    $( "#datepicker1" ).datepicker();
+  	});
+  	</script>
+
+    
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -24,15 +43,6 @@
 </head><!--/head-->
 
 <body data-spy="scroll" data-target="#navbar" data-offset="0">
-
-<!--  
-<script>
-  $(function() {
-    $( "#datepicker" ).datepicker();
-  });
-  </script>
-
--->
 
 
 
@@ -68,16 +78,16 @@
             <div class="item active">
                 <div class="container">
                     <div class="carousel-content">
-                        <h1>Hello Earthlings!</h1>
-                        <p class="lead">Xeon is the best free onepage responsive theme available arround the globe<br>Download it right now for free</p>
+                        <h1>Hello ${faculty.fname}!</h1>
+                        <p class="lead">Have a nice day!</p>
                     </div>
                 </div>
             </div><!--/.item-->
             <div class="item">
                 <div class="container">
                     <div class="carousel-content">
-                        <h1>We come in peace</h1>
-                        <p class="lead">Download free but 100% premium quaility twitter Bootstrap based WordPress and HTML themes <br>from shapebootstrap.net</p>
+                        <h1>Be proud you are a teacher,</h1>
+                        <p class="lead">the future depends on you.</p>
                     </div>
                 </div>
             </div><!--/.item-->
@@ -89,7 +99,30 @@
     <section id="viewClass">    
         <div class="container">       
             <div class="box first">
-             <br><br><br><br><br>
+             <br><br><br>
+             	<h3> Filter by: </h3>
+             	
+             	<form method="post" action="filterView">
+             	<label class="control-label" for="textinput">School Year: </label>
+             	 <select id="selectbasic" name="selectbasic" class="input-medium">
+   		             
+   		              <c:forEach var="listValue" items="${schoolYearList}">
+                      		<option>${listValue.acadYear}</option>
+   		           	  </c:forEach>
+   		              
+	   			</select>
+	   			
+	   			 <label class="control-label" for="textinput">Semester: </label>
+	   			 <select id="selectbasic" name="selectbasic" class="input-medium">
+   		              <option>1st Semester</option>
+   		              <option>2nd Semester</option>
+   		         </select>
+	   			
+	   			<button id="button1id" name="button1id" class="btn btn-success">Filter</button>
+	   			
+	   			</form>
+	   			
+             <br><br>
                 <div class="row">
                     
                     
@@ -146,14 +179,14 @@
                 <form class="form-horizontal">
 <fieldset>
 
-<!-- Form Name -->
-<legend>Add Class</legend>
+<!-- Form Name 
+<legend>Add Class</legend> -->
 
 <!-- Text input-->
 <div class="control-group">
   <label class="control-label" for="Startdate">Start Date:</label>
   <div class="controls">
-    <input id="datepicker" name="Startdate" placeholder="dd-mm-yyyy" class="input-small" required type="text">
+    <input id="datepicker" name="startdate" placeholder="dd-mm-yyyy" class="input-small" required type="text">
     
   </div>
 </div>
@@ -179,8 +212,8 @@
 <!-- Text input-->
 <div class="control-group">
   <label class="control-label" for="textinput">Due Date</label>
-  <div class="controls">
-    <input id="datepicker" name="textinput" placeholder="dd-mm-yyyy hh:mm" class="input-medium" required type="text">
+   <div class="controls">
+    <input id="datepicker1" name="enddate" placeholder="dd-mm-yyyy" class="input-small" required type="text">
     
   </div>
 </div>
@@ -376,16 +409,8 @@
         </div>
     </footer><!--/#footer-->
 
-    <script src="resources/faculty/js/jquery.js"></script>
-    <script src="resources/faculty/js/bootstrap.min.js"></script>
-    <script src="resources/faculty/js/jquery.isotope.min.js"></script>
-    <script src="resources/faculty/js/jquery.prettyPhoto.js"></script>
-    <script src="resources/faculty/js/main.js"></script>
     
-  <!--   
-    <link href="resources/faculty/css/" rel="stylesheet">
-    <script src="resources/faculty/js/"></script>
-    <script src="resources/faculty/js/"></script> --> 
+    
     
 </body>
 </html>

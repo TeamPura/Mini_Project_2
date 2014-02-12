@@ -19,16 +19,8 @@ public class SchoolYear implements Serializable {
 	@Column(name="school_year_id")
 	private int schoolYearId;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="acad_end_date")
-	private Date acadEndDate;
-
-	@Column(name="acad_name")
-	private String acadName;
-
-	@Temporal(TemporalType.DATE)
-	@Column(name="acad_start_date")
-	private Date acadStartDate;
+	@Column(name="acad_year")
+	private String acadYear;
 
 	//bi-directional many-to-one association to Class
 	@OneToMany(mappedBy="schoolYear")
@@ -45,29 +37,14 @@ public class SchoolYear implements Serializable {
 		this.schoolYearId = schoolYearId;
 	}
 
-	public Date getAcadEndDate() {
-		return this.acadEndDate;
+	public String getAcadYear() {
+		return this.acadYear;
 	}
 
-	public void setAcadEndDate(Date acadEndDate) {
-		this.acadEndDate = acadEndDate;
+	public void setAcadYear(String acadYear) {
+		this.acadYear = acadYear;
 	}
 
-	public String getAcadName() {
-		return this.acadName;
-	}
-
-	public void setAcadName(String acadName) {
-		this.acadName = acadName;
-	}
-
-	public Date getAcadStartDate() {
-		return this.acadStartDate;
-	}
-
-	public void setAcadStartDate(Date acadStartDate) {
-		this.acadStartDate = acadStartDate;
-	}
 
 	public List<Class> getClazzs() {
 		return this.clazzs;
