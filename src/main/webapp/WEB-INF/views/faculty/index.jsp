@@ -12,6 +12,8 @@
     <link href="resources/faculty/css/font-awesome.min.css" rel="stylesheet">
     <link href="resources/faculty/css/prettyPhoto.css" rel="stylesheet">
     <link href="resources/faculty/css/main.css" rel="stylesheet">
+    
+    <link href="resources/faculty/css/bootstrap.min1.css" rel="stylesheet">
         
     <script src="resources/faculty/js/jquery.js"></script>
     <script src="resources/faculty/js/bootstrap.min.js"></script>
@@ -98,12 +100,14 @@
 
     <section id="viewClass">    
         <div class="container">       
-            <div class="box first">
-             <br><br><br>
+            <div class="box first">             
+              <div class="center gap">
+                    <h2>View Classes</h2>
+                    </div><!--/.center-->
              	<h3> Filter by: </h3>
              	
              	<form method="post" action="filterView">
-             	<label class="control-label" for="textinput">School Year: </label>
+             	School Year:
              	 <select id="selectbasic" name="selectbasic" class="input-medium">
    		             
    		              <c:forEach var="listValue" items="${schoolYearList}">
@@ -112,7 +116,7 @@
    		              
 	   			</select>
 	   			
-	   			 <label class="control-label" for="textinput">Semester: </label>
+	   			Semester:
 	   			 <select id="selectbasic" name="selectbasic" class="input-medium">
    		              <option>1st Semester</option>
    		              <option>2nd Semester</option>
@@ -120,9 +124,7 @@
 	   			
 	   			<button id="button1id" name="button1id" class="btn btn-success">Filter</button>
 	   			
-	   			</form>
-	   			
-             <br><br>
+	   			</form>          
                 <div class="row">
                     
                     
