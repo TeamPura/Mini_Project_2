@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page session="true" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,27 +9,36 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Faculty</title>
+        
+    <link rel="shortcut icon" type="image/ico" href="http://www.datatables.net/favicon.ico" />
+        
+    <link href="resources/faculty/css/bootstrap.min1.css" rel="stylesheet">
+    
     <link href="resources/faculty/css/bootstrap.min.css" rel="stylesheet">
     <link href="resources/faculty/css/font-awesome.min.css" rel="stylesheet">
     <link href="resources/faculty/css/prettyPhoto.css" rel="stylesheet">
     <link href="resources/faculty/css/main.css" rel="stylesheet">
-    
-    <link href="resources/faculty/css/bootstrap.min1.css" rel="stylesheet">
-        
-    <script src="resources/faculty/js/jquery.js"></script>
+
+	<!-- <link href="resources/faculty/css/jquery.dataTables.css" rel="stylesheet">  -->
+	
+    <script src="resources/faculty/js/jquery-1.10.2.js"></script>  
     <script src="resources/faculty/js/bootstrap.min.js"></script>
     <script src="resources/faculty/js/jquery.isotope.min.js"></script>
     <script src="resources/faculty/js/jquery.prettyPhoto.js"></script>
     <script src="resources/faculty/js/main.js"></script>    
-  
-    <link href="resources/faculty/css/jquery-ui-1.10.4.custom.css" rel="stylesheet">
-    <script src="resources/faculty/js/jquery-1.10.2.js"></script>
+    
+    <script type="text/javascript" charset="utf-8"  src="resources/faculty/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" charset="utf-8"  src="resources/faculty/js/DT_bootstrap.js"></script>   
+
+    <link href="resources/faculty/css/jquery-ui-1.10.4.custom.css" rel="stylesheet">  
     <script src="resources/faculty/js/jquery-ui-1.10.4.custom.js"></script> 
     
     <script>
     $(function() {
 	    $( "#datepicker" ).datepicker();
 	    $( "#datepicker1" ).datepicker();
+	    $( "#datepicker2" ).datepicker();
+	    $( "#datepicker3" ).datepicker();
   	});
   	</script>
 
@@ -66,7 +76,7 @@
                         <li class="active"><a href="#main-slider"><i class="icon-home"></i></a></li>
                         <li><a href="#viewClass">View Class</a></li>
                         <li><a href="#addClass">Add Class</a></li>
-                        <li><a href="#editClass">Edit Class</a></li>
+                        <li><a href="#editClass">Update Class</a></li>
                         <li><a href="#facultyProfile">Faculty Profile</a></li>
                         <li><a href="#">Logout</a></li>
                     </ul>
@@ -82,6 +92,7 @@
                     <div class="carousel-content">
                         <h1>Hello ${faculty.fname}!</h1>
                         <p class="lead">Have a nice day!</p>
+                        <p class="lead">${serverTime}</p>
                     </div>
                 </div>
             </div><!--/.item-->
@@ -104,36 +115,15 @@
               <div class="center gap">
                     <h2>View Classes</h2>
                     </div><!--/.center-->
-             	<h3> Filter by: </h3>
              	
-             	<form method="post" action="filterView">
-             	School Year:
-             	 <select id="selectbasic" name="selectbasic" class="input-medium">
-   		             
-   		              <c:forEach var="listValue" items="${schoolYearList}">
-                      		<option>${listValue.acadYear}</option>
-   		           	  </c:forEach>
-   		              
-	   			</select>
-	   			
-	   			Semester:
-	   			 <select id="selectbasic" name="selectbasic" class="input-medium">
-   		              <option>1st Semester</option>
-   		              <option>2nd Semester</option>
-   		         </select>
-	   			
-	   			<button id="button1id" name="button1id" class="btn btn-success">Filter</button>
-	   			
-	   			</form>          
-                <div class="row">
-                    
-                    
-                  	<table class = "CSSTableGenerator" align = "center"> 
+                  	<table  class="table table-striped table-bordered" id="example"> 
+                   <thead> 
                    
                   	 	<tr>	
-                   				<td>Class ID</td> 
-								<td>Enrollment Due Date</td> 
-                                <td>Max</td> 
+                   				<td>Subject Name</td> 
+								<td>Enrollment Due Date</td>
+								<td>Enrolled</td>
+						        <td>Max</td> 
                                 <td>Min</td> 
                                 <td>Start Date</td> 
                                 <td>Status</td> 
@@ -142,23 +132,28 @@
                                 <td>Start</td>
                                 <td>End</td>  
                    		</tr>
-                   
-					<c:forEach var="listValue" items="${classList}">
-
+                   		
+                   </thead>
+                   <tbody>
+					<c:forEach begin="0" end="${fn:length(classList) - 1}" var="index">
+					
                         <tr>
-                        		<td>${listValue.subject.subjName}</td> 
-								<td>${listValue.dueEnrollmentDate}</td> 
-                                <td> ${listValue.maxStudents}</td> 
-                                <td> ${listValue.minStudents}</td> 
-                                <td> ${listValue.startClassDate}</td> 
-                                <td> ${listValue.status}</td> 
-                                <td> ${listValue.day.dayName}</td>
-                                <td> ${listValue.room.roomName}</td>  
-                                <td> ${listValue.schedule.scheduleStartTime}</td> 
-                                <td> ${listValue.schedule.scheduleEndTime}</td> 
+                        		<td> ${classList[index].subject.subjName}</td> 
+								<td> ${classList[index].dueEnrollmentDate}</td>								
+								<td> ${allEnrolled[index]}</td>																				
+								<td> ${classList[index].maxStudents}</td> 
+                                <td> ${classList[index].minStudents}</td> 
+                                <td> ${classList[index].startClassDate}</td> 
+                                <td> ${classList[index].status}</td> 
+                                <td> ${classList[index].day.dayName}</td>
+                                <td> ${classList[index].room.roomName}</td>  
+                                <td> ${classList[index].schedule.scheduleStartTime}</td> 
+                                <td> ${classList[index].schedule.scheduleEndTime}</td> 
                         </tr>
 
            			 </c:forEach>
+                                        
+                    </tbody>
                     
                     </table>
                                         
@@ -178,83 +173,123 @@
                 
                 
                 
-                <form class="form-horizontal">
+                <form class="form-horizontal" method="post" action="addClassPost">
 <fieldset>
 
 <!-- Form Name 
 <legend>Add Class</legend> -->
 
-<!-- Text input-->
+
+<!-- Subject Drop Down -->   
 <div class="control-group">
-  <label class="control-label" for="Startdate">Start Date:</label>
+  <label class="control-label" for="asd">Subject</label>
   <div class="controls">
-    <input id="datepicker" name="startdate" placeholder="dd-mm-yyyy" class="input-small" required type="text">
-    
+    <select id="endTime" name="subject.subjId" class="input-medium">
+    				<option> </option>
+      	<c:forEach var="listValue" items="${subjectList}">
+                   <option value="${listValue.subjId}">${listValue.semester.yearLevel.yearLevelName} Year - ${listValue.semester.semesterDesc} - ${listValue.subjName} - ${listValue.subjDesc} - ${listValue.units}.0 units</option>
+	   	</c:forEach>
+    </select>
   </div>
-</div>
+</div>  
 
-<!-- Text input-->
-<div class="control-group">
-  <label class="control-label" for="minstud">Minimum Students:</label>
-  <div class="controls">
-    <input id="minstud" name="minstud" placeholder="" class="input-mini" required type="text">
-    
-  </div>
-</div>
 
-<!-- Text input-->
-<div class="control-group">
-  <label class="control-label" for="textinput">Maximun Students:</label>
-  <div class="controls">
-    <input id="textinput" name="textinput" placeholder="" class="input-mini" type="text">
-    
-  </div>
-</div>
 
-<!-- Text input-->
-<div class="control-group">
-  <label class="control-label" for="textinput">Due Date</label>
-   <div class="controls">
-    <input id="datepicker1" name="enddate" placeholder="dd-mm-yyyy" class="input-small" required type="text">
-    
-  </div>
-</div>
 
-<!-- Select Basic -->
+<!-- Days Drop Down-->
 <div class="control-group">
   <label class="control-label" for="selectbasic">Days</label>
   <div class="controls">
-    <select id="selectbasic" name="selectbasic" class="input-medium">
+    <select id="selectbasic" name="day.dayId" class="input-medium">
+    				<option> </option>
    		<c:forEach var="listValue" items="${dayList}">
-                   <option>${listValue.dayName}</option>
+                   <option value="${listValue.dayId}">${listValue.dayName}</option>
 	   	</c:forEach>
  </select>
   </div>
 </div>
 
-<!-- Select Basic -->
+<!-- Start time and End Time Drop Down -->
 <div class="control-group">
-  <label class="control-label" for="asd">Start Time</label>
+  <label class="control-label" for="asd">Time Schedule</label>
   <div class="controls">
-    <select id="startTime" name="startTime" class="input-medium">
+    <select id="startTime" name="schedule.scheduleId" class="input-medium" required>
+    				<option> </option>
       	<c:forEach var="listValue" items="${scheduleList}">
-                   <option>${listValue.scheduleStartTime}</option>
+                   <option value="${listValue.scheduleId}">${listValue.scheduleStartTime} - ${listValue.scheduleEndTime}</option>
+	   	</c:forEach>
+    </select>
+  </div>
+</div>
+ 
+
+
+
+<!-- Room Drop Down-->    
+<div class="control-group">
+  <label class="control-label" for="asd">Room and Capacity</label>
+  <div class="controls">
+    <select id="endTime" name="room.roomId" class="input-medium" required>
+    				<option> </option>
+      	<c:forEach var="listValue" items="${roomList}">
+                   <option value="${listValue.roomId}">${listValue.roomName} Capacity-${listValue.roomCapacity}</option>
 	   	</c:forEach>
     </select>
   </div>
 </div>
 
-<!-- Select Basic -->
+<!-- School Year Drop Down -->
 <div class="control-group">
-  <label class="control-label" for="asd">End Time</label>
+  <label class="control-label" for="asd">School Year</label>
   <div class="controls">
-    <select id="endTime" name="endTime" class="input-medium">
-      	<c:forEach var="listValue" items="${scheduleList}">
-                   <option>${listValue.scheduleEndTime}</option>
+    <select id="startTime" name="schoolYear.schoolYearId" class="input-medium" required>
+    				<option> </option>
+      	<c:forEach var="listValue" items="${schoolYearList}">
+                   <option value="${listValue.schoolYearId}">${listValue.acadYear}</option>
 	   	</c:forEach>
     </select>
   </div>
 </div>
+
+
+<!-- Start Date DatePicker Input-->
+<div class="control-group">
+  <label class="control-label" for="Startdate">Start Date:</label>
+  <div class="controls">
+    <input id="datepicker" name="startClassDate" placeholder="dd-mm-yyyy" class="input-small" required type="text">
+    
+  </div>
+</div>
+
+
+<!-- Due Date DatePicker Input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">Due Date</label>
+   <div class="controls">
+    <input id="datepicker1" name="dueEnrollmentDate" placeholder="dd-mm-yyyy" class="input-small" required type="text">
+    
+  </div>
+</div>
+
+<!-- Minimum Students Text input-->
+<div class="control-group">
+  <label class="control-label" for="minstud">Minimum Students:</label>
+  <div class="controls">
+    <input id="minstud" name="minStudents" placeholder="" class="input-mini" required type="text">
+    
+  </div>
+</div>
+
+<!-- Maximum Students Text input-->
+<div class="control-group">
+  <label class="control-label" for="textinput">Maximun Students:</label>
+  <div class="controls">
+    <input id="textinput" name="maxStudents" placeholder="" class="input-mini" type="text">
+    
+  </div>
+</div>
+
+
 
 <!-- Button (Double) -->
 <div class="control-group">
@@ -268,12 +303,7 @@
 </fieldset>
 </form>
                 
-                
-                
-                
-                
-                
-                
+         
                 
             </div><!--/.box-->
         </div><!--/.container-->
@@ -284,52 +314,78 @@
         	<div class="box">
         	<br>
                 <div class="center">
-                    <h2>Edit Class</h2>
-                    <p class="lead">Pellentesque habitant morbi tristique senectus et netus et <br>malesuada fames ac turpis egestas.</p>
-                </div><!--/.center-->   
-                <div class="big-gap"></div>
-                <div id="pricing-table" class="row">
-                    <div class="col-sm-4">
-                        <ul class="plan">
-                            <li class="plan-name">Basic</li>
-                            <li class="plan-price">$29</li>
-                            <li>5GB Storage</li>
-                            <li>1GB RAM</li>
-                            <li>400GB Bandwidth</li>
-                            <li>10 Email Address</li>
-                            <li>Forum Support</li>
-                            <li class="plan-action"><a href="#" class="btn btn-primary btn-lg">Signup</a></li>
-                        </ul>
-                    </div><!--/.col-sm-4-->
-                    <div class="col-sm-4">
-                        <ul class="plan featured">
-                            <li class="plan-name">Standard</li>
-                            <li class="plan-price">$49</li>
-                            <li>10GB Storage</li>
-                            <li>2GB RAM</li>
-                            <li>1TB Bandwidth</li>
-                            <li>100 Email Address</li>
-                            <li>Forum Support</li>
-                            <li class="plan-action"><a href="#" class="btn btn-primary btn-lg">Signup</a></li>
-                        </ul>
-                    </div><!--/.col-sm-4-->
-                    <div class="col-sm-4">
-                        <ul class="plan">
-                            <li class="plan-name">Advanced</li>
-                            <li class="plan-price">$199</li>
-                            <li>30GB Storage</li>
-                            <li>5GB RAM</li>
-                            <li>5TB Bandwidth</li>
-                            <li>1000 Email Address</li>
-                            <li>Forum Support</li>
-                            <li class="plan-action"><a href="#" class="btn btn-primary btn-lg">Signup</a></li>
-                        </ul>
-                    </div><!--/.col-sm-4-->
+                    <h2>Update Class</h2>
+                    
+           <form action = "updatePost" method="post">        
+                  	
+                  	<table class="table table-striped table-bordered" id="example"> 
+                   
+                  	 	<tr>	
+                   				<td>Subject Name</td> 
+								<td>Enrollment Due Date</td>
+								<td>Enrolled</td>
+						        <td>Max</td> 
+                                <td>Min</td> 
+                                <td>Start Date</td> 
+                                <td>Status</td> 
+                                <td>Day</td>
+                                <td>Room</td>  
+                                <td>Start</td>
+                                <td>End</td>  
+                   		</tr>
+                   
+					<c:forEach begin="0" end="${fn:length(classDue) - 1}" var="index">
+
+                        <tr>
+                        		<td> ${classDue[index].subject.subjName}</td> 
+								<td>  
+  									<input id="datepicker2" name="dueEnrollmentDateUpdate" value="${classDue[index].dueEnrollmentDate}" class="input-small" required type="text">	
+  								</td>		
+  										
+								<td> ${Enrolled[index]}</td>																				
+								<td> ${classDue[index].maxStudents}</td> 
+                                <td> ${classDue[index].minStudents}</td>                           
+                                <td>  
+  									<input id="datepicker3" name="dueEnrollmentDateUpdate" value="${classDue[index].startClassDate}" class="input-small" required type="text">	
+  								</td>	
+                                
+                                <td><select id="endTime" name="room.roomId" class="input-medium" > 
+                                
+                                <option value = "1"> ${classDue[index].status} </option>
+                                <option value = "2"> Cancel </option>
+                                <option value = "3"> Start </option>
+                                
+                                 </select></td> 
+                                 
+                                <td> ${classDue[index].day.dayName}</td>
+                                <td> ${classDue[index].room.roomName}</td>  
+                                <td> ${classDue[index].schedule.scheduleStartTime}</td> 
+                                <td> ${classDue[index].schedule.scheduleEndTime}</td> 
+                        </tr>
+
+           			 </c:forEach>
+     
+                    </table>
+                     
+                     
+                     
+						<!-- Button (Double) -->
+						<div class="control-group">
+						  <label class="control-label" for="button1id"></label>
+						  <div class="controls">
+						    <button id="button1id" name="button1id" class="btn btn-success">Update</button>
+						    <button id="button2id" name="button2id" class="btn btn-danger">Cancel</button>
+						  </div>
+						</div>
+                     
+                     
+                     </form>  
+                     
                 </div> 
             </div> 
         </div>
     </section><!--/#pricing-->
-
+                
     <section id="facultyProfile">
         <div class="container">
             <div class="box">
