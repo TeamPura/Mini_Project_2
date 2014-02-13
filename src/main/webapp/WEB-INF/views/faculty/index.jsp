@@ -312,11 +312,11 @@
     <section id="editClass">
         <div class="container">
         	<div class="box">
-        	<br>
-                <div class="center">
+        	    <div class="center">
                     <h2>Update Class</h2>
                     
-           <form action = "updatePost" method="post">        
+           <form class="form-horizontal" action ="updateClassPost" method="post">      
+           <fieldset>  
                   	
                   	<table class="table table-striped table-bordered" id="example"> 
                    
@@ -373,12 +373,11 @@
 						<div class="control-group">
 						  <label class="control-label" for="button1id"></label>
 						  <div class="controls">
-						    <button id="button1id" name="button1id" class="btn btn-success">Update</button>
-						    <button id="button2id" name="button2id" class="btn btn-danger">Cancel</button>
+						    <button id="button1id" name="button3id" class="btn btn-success" type="submit">Update</button>
 						  </div>
 						</div>
                      
-                     
+                     </fieldset>
                      </form>  
                      
                 </div> 

@@ -40,7 +40,7 @@ public class FacultyController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	
+	List<Class> classDuePost;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 * @throws ParseException 
@@ -76,8 +76,6 @@ public class FacultyController {
 			model.addAttribute("allEnrolled",allEnrolled);
 			
 		}
-				
-				
 		
 		/* For add class */
 		
@@ -97,6 +95,8 @@ public class FacultyController {
 
 		List<Integer> Enrolled = new ArrayList<Integer>();
 		List<Class> classDue = facultyService.getClassDue(date);
+		
+		classDuePost = classDue;
 				
 		for(int i=0; i<classDue.size();i++){
 					
@@ -144,6 +144,25 @@ public class FacultyController {
 		classs.setFaculty(faculty);			
 		classs.setStatus("New");
 		facultyService.addNewClass(classs);
+								
+		return "redirect:/faculty";
+	}
+	
+	
+	@RequestMapping(value = "/updateClassPost", method = RequestMethod.POST)
+	public String updateClassPost(@ModelAttribute Class classs) {
+		
+		logger.info("I'm here!");
+		
+		
+		for(int i=0; i<classDuePost.size();i++){
+							
+			logger.info("To update: " + classDuePost.get(i).getClassId());
+		
+		}
+		
+		logger.info("I'm here 2!");
+		//facultyService.addNewClass(classs);
 								
 		return "redirect:/faculty";
 	}

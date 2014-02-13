@@ -24,7 +24,7 @@ public class Class implements Serializable {
 
 	@Column(name="max_students")
 	private String maxStudents;
-
+	
 	@Column(name="min_students")
 	private String minStudents;
 
@@ -32,12 +32,14 @@ public class Class implements Serializable {
 	@Column(name="start_class_date")
 	private Date startClassDate;
 
+	
 	private String status;
 
 	//bi-directional many-to-one association to CallInSick
 	@OneToMany(mappedBy="clazz")
 	private List<CallInSick> callInSicks;
 
+	
 	//bi-directional many-to-one association to Day
 	@ManyToOne
 	@JoinColumn(name="day_id")
