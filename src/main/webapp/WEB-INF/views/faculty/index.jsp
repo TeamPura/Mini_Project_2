@@ -56,9 +56,6 @@
 
 <body data-spy="scroll" data-target="#navbar" data-offset="0">
 
-
-
-
     <header id="header" role="banner">
         <div class="container">
             <div id="navbar" class="navbar navbar-default">
@@ -213,7 +210,7 @@
 <div class="control-group">
   <label class="control-label" for="asd">Time Schedule</label>
   <div class="controls">
-    <select id="startTime" name="schedule.scheduleId" class="input-medium" required>
+    <select id="startTime" name="schedule.scheduleId" class="input-medium">
     				<option> </option>
       	<c:forEach var="listValue" items="${scheduleList}">
                    <option value="${listValue.scheduleId}">${listValue.scheduleStartTime} - ${listValue.scheduleEndTime}</option>
@@ -229,7 +226,7 @@
 <div class="control-group">
   <label class="control-label" for="asd">Room and Capacity</label>
   <div class="controls">
-    <select id="endTime" name="room.roomId" class="input-medium" required>
+    <select id="endTime" name="room.roomId" class="input-medium">
     				<option> </option>
       	<c:forEach var="listValue" items="${roomList}">
                    <option value="${listValue.roomId}">${listValue.roomName} Capacity-${listValue.roomCapacity}</option>
@@ -242,7 +239,7 @@
 <div class="control-group">
   <label class="control-label" for="asd">School Year</label>
   <div class="controls">
-    <select id="startTime" name="schoolYear.schoolYearId" class="input-medium" required>
+    <select id="startTime" name="schoolYear.schoolYearId" class="input-medium">
     				<option> </option>
       	<c:forEach var="listValue" items="${schoolYearList}">
                    <option value="${listValue.schoolYearId}">${listValue.acadYear}</option>
@@ -315,10 +312,9 @@
         	    <div class="center">
                     <h2>Update Class</h2>
                     
-           <form class="form-horizontal" action ="updateClassPost" method="post">      
-           <fieldset>  
-                  	
-                  	<table class="table table-striped table-bordered" id="example"> 
+               <form class="form-horizontal" method="post" action="updateClassPost">      
+           	
+                	<table class="table table-striped table-bordered" id="example"> 
                    
                   	 	<tr>	
                    				<td>Subject Name</td> 
@@ -334,28 +330,27 @@
                                 <td>End</td>  
                    		</tr>
                    
-					<c:forEach begin="0" end="${fn:length(classDue) - 1}" var="index">
+					<c:forEach begin="0" end="${fn:length(classDue)-1}" var="index">
 
                         <tr>
                         		<td> ${classDue[index].subject.subjName}</td> 
 								<td>  
-  									<input id="datepicker2" name="dueEnrollmentDateUpdate" value="${classDue[index].dueEnrollmentDate}" class="input-small" required type="text">	
+  									<input id="datepicker2" name="${classDue[index].startClassDate}" value="${classDue[index].dueEnrollmentDate}" class="input-small" required type="text">	
   								</td>		
   										
 								<td> ${Enrolled[index]}</td>																				
 								<td> ${classDue[index].maxStudents}</td> 
                                 <td> ${classDue[index].minStudents}</td>                           
                                 <td>  
-  									<input id="datepicker3" name="dueEnrollmentDateUpdate" value="${classDue[index].startClassDate}" class="input-small" required type="text">	
+  									<input id="datepicker3" name="${classDue[index].dueEnrollmentDate}" value="${classDue[index].startClassDate}" class="input-small" required type="text">	
   								</td>	
                                 
-                                <td><select id="endTime" name="room.roomId" class="input-medium" > 
+                                <td><select id="endTime" name="${classDue[index].status}" class="input-medium" > 
                                 
-                                <option value = "1"> ${classDue[index].status} </option>
-                                <option value = "2"> Cancel </option>
-                                <option value = "3"> Start </option>
-                                
-                                 </select></td> 
+                                <option value = "${classDue[index].status}"> ${classDue[index].status} </option>
+                                <option value = "Cancel"> Cancel </option>
+                                <option value = "On going"> Start </option>
+                                </select></td> 
                                  
                                 <td> ${classDue[index].day.dayName}</td>
                                 <td> ${classDue[index].room.roomName}</td>  
@@ -366,9 +361,7 @@
            			 </c:forEach>
      
                     </table>
-                     
-                     
-                     
+               
 						<!-- Button (Double) -->
 						<div class="control-group">
 						  <label class="control-label" for="button1id"></label>
@@ -377,7 +370,6 @@
 						  </div>
 						</div>
                      
-                     </fieldset>
                      </form>  
                      
                 </div> 
