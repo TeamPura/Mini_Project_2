@@ -5,14 +5,16 @@ import java.util.List;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
+import javax.servlet.http.HttpSession;
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +28,6 @@ import com.project.apprentice.model.Room;
 import com.project.apprentice.model.Schedule;
 import com.project.apprentice.model.SchoolYear;
 import com.project.apprentice.model.Semester;
-import com.project.apprentice.model.Student;
 import com.project.apprentice.model.StudentClass;
 import com.project.apprentice.model.Subject;
 import com.project.apprentice.service.FacultyService;
@@ -132,7 +133,7 @@ public class FacultyController {
 	
 	
 	@RequestMapping(value = "/addClassPost", method = RequestMethod.POST)
-	public String addClassPost(@ModelAttribute Day day, Class classs, Faculty faculty){
+	public String addClassPost(@ModelAttribute Class classs, Faculty faculty){
 		
 		faculty = homeController.faculty;
 		
@@ -143,29 +144,7 @@ public class FacultyController {
 		return "redirect:/faculty";
 	}
 	
-	
-	@RequestMapping(value = "/updateClassPost", method = RequestMethod.POST)
-	public String updateClassPost(@ModelAttribute("updateClass") List<Class> updateClass) {
-	
 		
-								
-		return "redirect:/faculty";
-	}
-	
-			
-	
-	@RequestMapping(value = "/viewClassStudents", method = RequestMethod.POST)
-	public String viewClassStudentsPost(@ModelAttribute ("classId") int classId, Model model) {
-
-		List <StudentClass> studentsEnrolled = new ArrayList<StudentClass>();
-		
-		studentsEnrolled = facultyService.studentsEnrolled2((long)classId);
-		
-		model.addAttribute("studentsEnrolled",studentsEnrolled);
-						
-		return "faculty/classRoster";
-	}
-	
 	
 	  @RequestMapping(value = "/viewStudentsClassPost/{classId}")
 
@@ -177,11 +156,29 @@ public class FacultyController {
 		
               
          ModelAndView modelAndView = new ModelAndView("faculty/classRoster");
+         
          modelAndView.addObject("studentsEnrolled",studentsEnrolled);
 
          return modelAndView;
 
       }
+	  
+	  
+	  @InitBinder
+	  protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) {
+		  	SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			formatter.setLenient(false);
+		  	binder.registerCustomEditor(Date.class, new CustomDateEditor(formatter, false));
+		  	}
+	  
+	  
+		@RequestMapping(value = "/updateClassStudents", method = RequestMethod.POST)
+		public String viewClassStudentsPost(@ModelAttribute Class updateClass) throws ParseException {
+			
+			facultyService.updateUser(updateClass, (int)updateClass.getClassId());
+							
+			return "redirect:/faculty";
+		}
 
 
 	  
