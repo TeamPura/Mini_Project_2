@@ -89,7 +89,6 @@
                     <div class="carousel-content">
                         <h1>Hello ${faculty.fname}!</h1>
                         <p class="lead">Have a nice day!</p>
-                        <p class="lead">${serverTime}</p>
                     </div>
                 </div>
             </div><!--/.item-->
@@ -112,7 +111,15 @@
               <div class="center gap">
                     <h2>View Classes</h2>
                     </div><!--/.center-->
-             	
+         <c:choose>
+    <c:when test="${empty classList}">
+       <h3 align="center"> You have no class handled. </h3>
+    </c:when>
+    
+    <c:otherwise>  
+     
+        	
+                  	
                   	<table  class="table table-striped table-bordered" id="example"> 
                    <thead> 
                    
@@ -132,9 +139,18 @@
                    		
                    </thead>
                    <tbody>
+                   
+                   
 					<c:forEach begin="0" end="${fn:length(classList) - 1}" var="index">
 					
+					<form action="viewClassStudents" method="post"> 
+					
+					<input type="hidden" name="classId" value="${classList[index].classId}" />
+					
+								
                         <tr>
+                      
+                        		
                         		<td> ${classList[index].subject.subjName}</td> 
 								<td> ${classList[index].dueEnrollmentDate}</td>								
 								<td> ${allEnrolled[index]}</td>																				
@@ -146,13 +162,24 @@
                                 <td> ${classList[index].room.roomName}</td>  
                                 <td> ${classList[index].schedule.scheduleStartTime}</td> 
                                 <td> ${classList[index].schedule.scheduleEndTime}</td> 
+                                
+                                <td><button id="button1id" name="button1id" class="btn btn-success">View Class</button></td>
+                         
                         </tr>
+                   
+                   	</form>
 
            			 </c:forEach>
                                         
                     </tbody>
                     
                     </table>
+                   
+                    
+                
+                    </c:otherwise> 
+                
+                </c:choose>
                                         
                     
                 </div><!--/.row-->
@@ -171,6 +198,8 @@
                 
                 
                 <form class="form-horizontal" method="post" action="addClassPost">
+                
+                
 <fieldset>
 
 <!-- Form Name 
@@ -312,7 +341,15 @@
         	    <div class="center">
                     <h2>Update Class</h2>
                     
-               <form class="form-horizontal" method="post" action="updateClassPost">      
+                    
+ <c:choose>
+    <c:when test="${empty classDue}">
+       <h3> You have no overdue class enrollment. </h3>
+    </c:when>
+    
+    <c:otherwise> 
+        
+        <form class="form-horizontal" method="post" action="updateClassPost">      
            	
                 	<table class="table table-striped table-bordered" id="example"> 
                    
@@ -371,6 +408,13 @@
 						</div>
                      
                      </form>  
+        
+        
+        
+    </c:otherwise>
+ </c:choose>
+                    
+               
                      
                 </div> 
             </div> 
@@ -380,65 +424,24 @@
     <section id="facultyProfile">
         <div class="container">
             <div class="box">
-                <div class="center">
+            
+             <div class="center">
                     <h2>Faculty Profile</h2>
-                    <p class="lead">Pellentesque habitant morbi tristique senectus et netus et<br>malesuada fames ac turpis egestas.</p>
-                </div>
-                <div class="gap"></div>
-                <div id="team-scroller" class="carousel scale">
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="member">
-                                        <p><img class="img-responsive img-thumbnail img-circle" src="images/team1.jpg" alt="" ></p>
-                                        <h3>Agnes Smith<small class="designation">CEO &amp; Founder</small></h3>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="member">
-                                        <p><img class="img-responsive img-thumbnail img-circle" src="images/team2.jpg" alt="" ></p>
-                                        <h3>Donald Ford<small class="designation">Senior Vice President</small></h3>
-                                    </div>
-                                </div>        
-                                <div class="col-sm-4">
-                                    <div class="member">
-                                        <p><img class="img-responsive img-thumbnail img-circle" src="images/team3.jpg" alt="" ></p>
-                                        <h3>Karen Richardson<small class="designation">Assitant Vice President</small></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="row">
-                                <div class="col-sm-4">
-                                    <div class="member">
-                                        <p><img class="img-responsive img-thumbnail img-circle" src="images/team3.jpg" alt="" ></p>
-                                        <h3>David Robbins<small class="designation">Co-Founder</small></h3>
-                                    </div>
-                                </div>   
-                                <div class="col-sm-4">
-                                    <div class="member">
-                                        <p><img class="img-responsive img-thumbnail img-circle" src="images/team1.jpg" alt="" ></p>
-                                        <h3>Philip Mejia<small class="designation">Marketing Manager</small></h3>
-                                    </div>
-                                </div>     
-                                <div class="col-sm-4">
-                                    <div class="member">
-                                        <p><img class="img-responsive img-thumbnail img-circle" src="images/team2.jpg" alt="" ></p>
-                                        <h3>Charles Erickson<small class="designation">Support Manager</small></h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="left-arrow" href="#team-scroller" data-slide="prev">
-                        <i class="icon-angle-left icon-4x"></i>
-                    </a>
-                    <a class="right-arrow" href="#team-scroller" data-slide="next">
-                        <i class="icon-angle-right icon-4x"></i>
-                    </a>
-                </div><!--/.carousel-->
+            
+            <div class="controls">
+               
+               <h4>ID Number:  ${faculty.userId} </h4>
+               <h4>First Name:  ${faculty.fname} </h4>
+               <h4>Middle Name:  ${faculty.fname} </h4>
+               <h4>Last Name:  ${faculty.fname} </h4>
+               <h4>Birthday:  ${faculty.gender} </h4>
+               <h4>Birthday:  ${faculty.emailAddress} </h4>
+               <h4>Birthday:  ${faculty.status} </h4>
+               <h4>Birthday:  ${faculty.department.deptName} </h4>
+                           
+         	</div>
+               
+               </div>
             </div><!--/.box-->
         </div><!--/.container-->
     </section><!--/#about-us-->

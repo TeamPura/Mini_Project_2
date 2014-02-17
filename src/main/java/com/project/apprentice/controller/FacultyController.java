@@ -5,20 +5,27 @@ import java.util.List;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.project.apprentice.model.Class;
 import com.project.apprentice.model.Faculty;
 import com.project.apprentice.model.Room;
 import com.project.apprentice.model.Schedule;
 import com.project.apprentice.model.SchoolYear;
 import com.project.apprentice.model.Semester;
+import com.project.apprentice.model.Student;
 import com.project.apprentice.model.StudentClass;
 import com.project.apprentice.model.Subject;
 import com.project.apprentice.service.FacultyService;
@@ -38,9 +45,11 @@ public class FacultyController {
 	private FacultyService facultyService;
 	
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	//private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	List<Class> classDuePost;
+	List<Class> classDuePost = new ArrayList<Class>();
+	
+	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 * @throws ParseException 
@@ -77,6 +86,8 @@ public class FacultyController {
 			
 		}
 		
+		
+		
 		/* For add class */
 		
 		model.addAttribute("faculty",homeController.faculty);
@@ -94,7 +105,7 @@ public class FacultyController {
 		/* For edit class*/		
 
 		List<Integer> Enrolled = new ArrayList<Integer>();
-		List<Class> classDue = facultyService.getClassDue(date);
+		List<Class> classDue = facultyService.getClassDue(date, date, homeController.faculty);
 		
 		classDuePost = classDue;
 				
@@ -108,6 +119,7 @@ public class FacultyController {
 			model.addAttribute("studentsEnrolled",studentsEnrolled);
 			model.addAttribute("classDue",classDue);
 			
+						
 		}
 		
 
@@ -116,24 +128,6 @@ public class FacultyController {
 	}
 	
 	
-	@RequestMapping(value = "/filterView", method = RequestMethod.POST)
-	public String filterView(Model model, Class classs){
-		
-		
-		logger.info("SY: " + classs.getSchoolYear());
-		//logger.info("Sem: " + classs.getSubject());
-	
-		
-		//Faculty faculty = homeController.faculty;
-	//	Subject subject= classs.getSubject();
-		//SchoolYear schoolYear = classs.getSchoolYear();
-		
-		//List<Class> classList = facultyService.getClassFiltered(faculty, subject, schoolYear);
-		
-		//model.addAttribute("classList", classList);
-		
-		return "redirect:/faculty";
-	}
 	
 	
 	@RequestMapping(value = "/addClassPost", method = RequestMethod.POST)
@@ -148,26 +142,40 @@ public class FacultyController {
 		return "redirect:/faculty";
 	}
 	
+	/*
+	@RequestMapping(value = "/updateClassPost/{classId}", method = RequestMethod.POST)
+	public ModelAndView updateClassPost(@PathVariable int classId) {
 	
-	@RequestMapping(value = "/updateClassPost", method = RequestMethod.POST)
-	public String updateClassPost(@ModelAttribute Class classs) {
 		
-		logger.info("I'm here!");
-		
-		
-		for(int i=0; i<classDuePost.size();i++){
-							
-			logger.info("To update: " + classDuePost.get(i).getClassId());
-		
-		}
-		
-		logger.info("I'm here 2!");
-		//facultyService.addNewClass(classs);
+		ModelAndView modelAndView = new ModelAndView("faculty/index");
 								
-		return "redirect:/faculty";
+		return modelAndView;
+	}
+	*/
+			
+	
+	@RequestMapping(value = "/viewClassStudents", method = RequestMethod.POST)
+	public String updateClassPost(@ModelAttribute ("classId") int classId, BindingResult classRoster, Model model) {
+
+		
+		//Class classFound = new Class();
+		List <StudentClass> studentsEnrolled = new ArrayList<StudentClass>();
+		
+		//classFound = facultyService.findOneClass((long) classId);
+		studentsEnrolled = facultyService.studentsEnrolled2((long)classId);
+		
+		model.addAttribute("studentsEnrolled",studentsEnrolled);
+						
+		return "faculty/classRoster";
 	}
 	
-	
-	
+	//@RequestMapping(value = "/viewClassStudentsGet", method = RequestMethod.GET)
+	//public String updateClassGet() {
+			
+
+	//	model.addAttribute("studentsEnrolled",studentsEnrolled);
+				
+	//	return "faculty/classRoster";
+	//}
 	
 }

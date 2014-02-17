@@ -25,7 +25,9 @@ public interface FacultyService {
 	public List<Subject> getSubjects();
 	public List<Room> getRoom();
 	public void addNewClass(Class addClass);
-	public List<Class> getClassDue(Date dueDate);
+	public List<Class> getClassDue(Date dueDate, Date dueDate2, Faculty faculty);
 	public List<StudentClass> studentsEnrolled(Class classs);
 	public void updateUser(Class classNew, int idToUpdate);
+	public Class findOneClass(long classId);
+	public List<StudentClass> studentsEnrolled2(long classId);
 }

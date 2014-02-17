@@ -16,7 +16,7 @@ public class Class implements Serializable {
 
 	@Id
 	@Column(name="class_id")
-	private int classId;
+	private long classId;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="due_enrollment_date")
@@ -77,11 +77,11 @@ public class Class implements Serializable {
 	public Class() {
 	}
 
-	public int getClassId() {
+	public long getClassId() {
 		return this.classId;
 	}
 
-	public void setClassId(int classId) {
+	public void setClassId(long classId) {
 		this.classId = classId;
 	}
 

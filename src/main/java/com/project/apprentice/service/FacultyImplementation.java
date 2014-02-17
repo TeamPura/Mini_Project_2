@@ -115,6 +115,16 @@ public class FacultyImplementation implements FacultyService {
 	}
 	
 	
+	public Class findOneClass(long classId){
+		
+		Class classOne =  classRepository.findOne(classId);
+		
+		return (classOne);
+		
+	}
+	
+	
+	
 	public void addNewClass(Class addClass){
 		
 		classRepository.save(addClass);		
@@ -138,9 +148,9 @@ public class FacultyImplementation implements FacultyService {
 		return (allRooms);
 	}
 	
-	public List<Class> getClassDue(Date dueDate){
+	public List<Class> getClassDue(Date dueDate, Date dueDate2, Faculty faculty){
 		
-		List<Class> allClassDue =  classRepository.findByDueEnrollmentDate(dueDate);
+		List<Class> allClassDue =  classRepository.findByDueEnrollmentDateOrDueEnrollmentDateBeforeAndFaculty(dueDate, dueDate2, faculty);
 		
 		return (allClassDue);
 	}
@@ -151,6 +161,14 @@ public class FacultyImplementation implements FacultyService {
 		
 		return (allStudentsEnrolled);
 	}
+	
+	public List<StudentClass> studentsEnrolled2(long classId){
+		
+		List<StudentClass> allStudentsEnrolled =  studentClassRepository.findByClazzClassId(classId);
+		
+		return (allStudentsEnrolled);
+	}
+	
 	
 	
 	public void updateUser(Class classNew, int idToUpdate){
