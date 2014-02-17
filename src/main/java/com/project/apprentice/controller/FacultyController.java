@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.apprentice.model.Class;
@@ -142,26 +143,22 @@ public class FacultyController {
 		return "redirect:/faculty";
 	}
 	
-	/*
-	@RequestMapping(value = "/updateClassPost/{classId}", method = RequestMethod.POST)
-	public ModelAndView updateClassPost(@PathVariable int classId) {
+	
+	@RequestMapping(value = "/updateClassPost", method = RequestMethod.POST)
+	public String updateClassPost(@ModelAttribute("updateClass") List<Class> updateClass) {
 	
 		
-		ModelAndView modelAndView = new ModelAndView("faculty/index");
 								
-		return modelAndView;
+		return "redirect:/faculty";
 	}
-	*/
+	
 			
 	
 	@RequestMapping(value = "/viewClassStudents", method = RequestMethod.POST)
-	public String updateClassPost(@ModelAttribute ("classId") int classId, BindingResult classRoster, Model model) {
+	public String viewClassStudentsPost(@ModelAttribute ("classId") int classId, Model model) {
 
-		
-		//Class classFound = new Class();
 		List <StudentClass> studentsEnrolled = new ArrayList<StudentClass>();
 		
-		//classFound = facultyService.findOneClass((long) classId);
 		studentsEnrolled = facultyService.studentsEnrolled2((long)classId);
 		
 		model.addAttribute("studentsEnrolled",studentsEnrolled);
@@ -169,13 +166,25 @@ public class FacultyController {
 		return "faculty/classRoster";
 	}
 	
-	//@RequestMapping(value = "/viewClassStudentsGet", method = RequestMethod.GET)
-	//public String updateClassGet() {
-			
+	
+	  @RequestMapping(value = "/viewStudentsClassPost/{classId}")
 
-	//	model.addAttribute("studentsEnrolled",studentsEnrolled);
-				
-	//	return "faculty/classRoster";
-	//}
+      public @ResponseBody ModelAndView viewClassStudentGet(@PathVariable int classId, Model model) {
+
+		 List <StudentClass> studentsEnrolled = new ArrayList<StudentClass>();
+			
+		 studentsEnrolled = facultyService.studentsEnrolled2((long)classId);
+		
+              
+         ModelAndView modelAndView = new ModelAndView("faculty/classRoster");
+         modelAndView.addObject("studentsEnrolled",studentsEnrolled);
+
+         return modelAndView;
+
+      }
+
+
+	  
+	  
 	
 }

@@ -13,24 +13,24 @@
         
     <link href="resources/faculty/css/bootstrap.min1.css" rel="stylesheet">
     
-    <link href="resources/faculty/css/bootstrap.min.css" rel="stylesheet">
-    <link href="resources/faculty/css/font-awesome.min.css" rel="stylesheet">
-    <link href="resources/faculty/css/prettyPhoto.css" rel="stylesheet">
-    <link href="resources/faculty/css/main.css" rel="stylesheet">
+    <link href="../resources/faculty/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../resources/faculty/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../resources/faculty/css/prettyPhoto.css" rel="stylesheet">
+    <link href="../resources/faculty/css/main.css" rel="stylesheet">
 
 	<!-- <link href="resources/faculty/css/jquery.dataTables.css" rel="stylesheet">  -->
 	
-    <script src="resources/faculty/js/jquery-1.10.2.js"></script>  
-    <script src="resources/faculty/js/bootstrap.min.js"></script>
-    <script src="resources/faculty/js/jquery.isotope.min.js"></script>
-    <script src="resources/faculty/js/jquery.prettyPhoto.js"></script>
-    <script src="resources/faculty/js/main.js"></script>    
+    <script src="../resources/faculty/js/jquery-1.10.2.js"></script>  
+    <script src="../resources/faculty/js/bootstrap.min.js"></script>
+    <script src="../resources/faculty/js/jquery.isotope.min.js"></script>
+    <script src="../resources/faculty/js/jquery.prettyPhoto.js"></script>
+    <script src="../resources/faculty/js/main.js"></script>    
     
-    <script type="text/javascript" charset="utf-8"  src="resources/faculty/js/jquery.dataTables.js"></script>
-	<script type="text/javascript" charset="utf-8"  src="resources/faculty/js/DT_bootstrap.js"></script>   
+    <script type="text/javascript" charset="utf-8"  src="../resources/faculty/js/jquery.dataTables.js"></script>
+	<script type="text/javascript" charset="utf-8"  src="../resources/faculty/js/DT_bootstrap.js"></script>   
 
-    <link href="resources/faculty/css/jquery-ui-1.10.4.custom.css" rel="stylesheet">  
-    <script src="resources/faculty/js/jquery-ui-1.10.4.custom.js"></script> 
+    <link href="../resources/faculty/css/jquery-ui-1.10.4.custom.css" rel="stylesheet">  
+    <script src="../resources/faculty/js/jquery-ui-1.10.4.custom.js"></script> 
 
 
 
