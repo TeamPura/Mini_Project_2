@@ -18,7 +18,7 @@ public class Class implements Serializable {
 	@Column(name="class_id")
 	private long classId;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="due_enrollment_date")
 	private Date dueEnrollmentDate;
 
